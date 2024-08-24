@@ -1,49 +1,43 @@
 let slideIndex = 0;
-const slides = document.querySelectorAll('.carousel-container a');
+const slides = document.querySelectorAll('.carousel-slide');
 const totalSlides = slides.length;
-let autoSlideInterval;
 
-function showSlide(index) {
-    if (index >= totalSlides) {
+function showSlides() {
+    slides.forEach((slide, index) => {
+        slide.style.display = 'none';
+        if (index === slideIndex) {
+            slide.style.display = 'flex';
+        }
+    });
+
+    slideIndex++;
+    if (slideIndex >= totalSlides) {
         slideIndex = 0;
-    } else if (index < 0) {
-        slideIndex = totalSlides - 1;
     }
 
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-    });
+    autoSlide = setTimeout(showSlides, 3000); // Change slide every 3 seconds
 }
 
-function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-        slideIndex++;
-        showSlide(slideIndex);
-    }, 3000); // Change slide every 3 seconds
-}
+let autoSlide = setTimeout(showSlides, 3000);
 
-function stopAutoSlide() {
-    clearInterval(autoSlideInterval);
-}
-
-document.querySelector('.next').addEventListener('click', () => {
-    slideIndex++;
-    showSlide(slideIndex);
-    stopAutoSlide();
-    startAutoSlide();
-});
+showSlides();
 
 document.querySelector('.prev').addEventListener('click', () => {
-    slideIndex--;
-    showSlide(slideIndex);
-    stopAutoSlide();
-    startAutoSlide();
+    clearTimeout(autoSlide);
+    slideIndex = (slideIndex > 0) ? slideIndex - 1 : totalSlides - 1;
+    showSlides();
 });
 
-slides.forEach(slide => {
-    slide.addEventListener('mouseover', stopAutoSlide);
-    slide.addEventListener('mouseout', startAutoSlide);
+document.querySelector('.next').addEventListener('click', () => {
+    clearTimeout(autoSlide);
+    slideIndex = (slideIndex + 1) % totalSlides;
+    showSlides();
 });
 
-showSlide(slideIndex);
-startAutoSlide();
+document.querySelector('.carousel-container').addEventListener('mouseover', () => {
+    clearTimeout(autoSlide);
+});
+
+document.querySelector('.carousel-container').addEventListener('mouseout', () => {
+    autoSlide = setTimeout(showSlides, 3000);
+});

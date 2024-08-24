@@ -2,86 +2,77 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    text-align: center;
 }
 
 header {
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f4;
-}
-
-#carousel {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    margin: 20px 0;
 }
 
 .carousel-container {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.carousel-container img {
-    max-width: 300px;
+.carousel-slide {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+.carousel-slide img {
+    max-width: 100%;
     height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
+    display: block;
+    margin: 0 auto;
 }
 
-.carousel-container img:hover {
-    transform: scale(1.05);
-}
-
-button.prev,
-button.next {
+.prev, .next {
+    cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
     color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+    font-weight: bold;
     font-size: 18px;
-    border-radius: 50%;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-button.prev {
-    left: 10px;
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
 }
 
-button.next {
-    right: 10px;
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 footer {
-    background-color: #f4f4f4;
-    padding: 10px;
-    text-align: center;
-    margin-top: auto;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #f8f8f8;
 }
 
-footer ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-footer ul li {
-    display: inline;
-}
-
-footer ul li a {
+footer a {
+    color: gray;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+footer a:hover {
+    color: darkgray;
+    text-decoration: underline;
 }
