@@ -1,37 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const totalSlides = slides.length;
+let slideIndex = 0;
+const slides = document.querySelectorAll('.carousel-container a');
+const totalSlides = slides.length;
+let autoSlideInterval;
 
-    function showSlide(index) {
-        if (index >= totalSlides) {
-            slideIndex = 0; // Reset to the first slide
-        } else if (index < 0) {
-            slideIndex = totalSlides - 1; // Set to the last slide
-        }
-
-        slides.forEach((slide, i) => {
-            slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-        });
+function showSlide(index) {
+    if (index >= totalSlides) {
+        slideIndex = 0;
+    } else if (index < 0) {
+        slideIndex = totalSlides - 1;
     }
 
-    const nextButton = document.querySelector('.next');
-    const prevButton = document.querySelector('.prev');
+    slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+}
 
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            slideIndex++;
-            showSlide(slideIndex);
-        });
-    }
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        slideIndex++;
+        showSlide(slideIndex);
+    }, 3000); // Change slide every 3 seconds
+}
 
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            slideIndex--;
-            showSlide(slideIndex);
-        });
-    }
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
 
-    // Initial display
+document.querySelector('.next').addEventListener('click', () => {
+    slideIndex++;
     showSlide(slideIndex);
+    stopAutoSlide();
+    startAutoSlide();
 });
+
+document.querySelector('.prev').addEventListener('click', () => {
+    slideIndex--;
+    showSlide(slideIndex);
+    stopAutoSlide();
+    startAutoSlide();
+});
+
+slides.forEach(slide => {
+    slide.addEventListener('mouseover', stopAutoSlide);
+    slide.addEventListener('mouseout', startAutoSlide);
+});
+
+showSlide(slideIndex);
+startAutoSlide();
