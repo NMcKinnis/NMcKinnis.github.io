@@ -1,45 +1,32 @@
-/* General styles for the page */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-/* Carousel styling */
+/* Ensure all carousel images are 500x500 pixels */
 .carousel-container {
     position: relative;
-    max-width: 100%;
-    margin: auto;
-}
-
-.carousel-slide {
-    display: none;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .carousel-slide img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
 }
 
-/* Footer styling */
-footer {
-    text-align: center;
-    margin-top: 20px;
-}
-
+/* Footer Links */
 .footer-links {
-    display: inline-block;
-    list-style: none;
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+    background-color: #f0f0f0;
 }
 
 .footer-links a {
-    color: #888;
-    margin: 0 15px;
+    color: #555;
     text-decoration: none;
 }
 
 .footer-links a:hover {
-    color: #555;
+    text-decoration: underline;
 }

@@ -1,34 +1,42 @@
-let slideIndex = 0;
-let slides = document.querySelectorAll('.carousel-slide');
-let autoSlideInterval = setInterval(showSlides, 3000);
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const totalSlides = slides.length;
+const slideInterval = 3000; // 3 seconds
 
-function showSlides() {
-    slides.forEach(slide => slide.style.display = "none");
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1 }
-    slides[slideIndex - 1].style.display = "block";
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.style.display = (i === index) ? 'block' : 'none';
+    });
 }
 
-function pauseSlides() {
-    clearInterval(autoSlideInterval);
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
 }
 
-function resumeSlides() {
-    autoSlideInterval = setInterval(showSlides, 3000);
+function startCarousel() {
+    showSlide(currentSlide); // Show the first image immediately
+    setInterval(nextSlide, slideInterval);
 }
 
-// Pause carousel on hover
-document.querySelector('.carousel-container').addEventListener('mouseenter', pauseSlides);
-document.querySelector('.carousel-container').addEventListener('mouseleave', resumeSlides);
+document.querySelector('.carousel-container').addEventListener('mouseover', () => {
+    clearInterval(carouselTimer);
+});
 
-// Manual controls
+document.querySelector('.carousel-container').addEventListener('mouseout', () => {
+    carouselTimer = setInterval(nextSlide, slideInterval);
+});
+
+let carouselTimer = setInterval(nextSlide, slideInterval);
+
 document.querySelector('.prev').addEventListener('click', () => {
-    pauseSlides();
-    slideIndex -= 2;
-    showSlides();
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
 });
 
 document.querySelector('.next').addEventListener('click', () => {
-    pauseSlides();
-    showSlides();
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
 });
+
+window.onload = startCarousel;
