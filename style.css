@@ -1,78 +1,45 @@
+/* General styles for the page */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     text-align: center;
 }
 
-header {
-    margin: 20px 0;
-}
-
+/* Carousel styling */
 .carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: auto;
 }
 
 .carousel-slide {
     display: none;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
 }
 
 .carousel-slide img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: auto;
 }
 
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-}
-
-.prev {
-    left: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
+/* Footer styling */
 footer {
+    text-align: center;
     margin-top: 20px;
-    padding: 10px 0;
-    background-color: #f8f8f8;
 }
 
-footer a {
-    color: gray;
-    text-decoration: none;
+.footer-links {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    color: #888;
     margin: 0 15px;
-    font-size: 14px;
+    text-decoration: none;
 }
 
-footer a:hover {
-    color: darkgray;
-    text-decoration: underline;
+.footer-links a:hover {
+    color: #555;
 }

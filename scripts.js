@@ -1,43 +1,34 @@
 let slideIndex = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const totalSlides = slides.length;
+let slides = document.querySelectorAll('.carousel-slide');
+let autoSlideInterval = setInterval(showSlides, 3000);
 
 function showSlides() {
-    slides.forEach((slide, index) => {
-        slide.style.display = 'none';
-        if (index === slideIndex) {
-            slide.style.display = 'flex';
-        }
-    });
-
+    slides.forEach(slide => slide.style.display = "none");
     slideIndex++;
-    if (slideIndex >= totalSlides) {
-        slideIndex = 0;
-    }
-
-    autoSlide = setTimeout(showSlides, 3000); // Change slide every 3 seconds
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
 }
 
-let autoSlide = setTimeout(showSlides, 3000);
+function pauseSlides() {
+    clearInterval(autoSlideInterval);
+}
 
-showSlides();
+function resumeSlides() {
+    autoSlideInterval = setInterval(showSlides, 3000);
+}
 
+// Pause carousel on hover
+document.querySelector('.carousel-container').addEventListener('mouseenter', pauseSlides);
+document.querySelector('.carousel-container').addEventListener('mouseleave', resumeSlides);
+
+// Manual controls
 document.querySelector('.prev').addEventListener('click', () => {
-    clearTimeout(autoSlide);
-    slideIndex = (slideIndex > 0) ? slideIndex - 1 : totalSlides - 1;
+    pauseSlides();
+    slideIndex -= 2;
     showSlides();
 });
 
 document.querySelector('.next').addEventListener('click', () => {
-    clearTimeout(autoSlide);
-    slideIndex = (slideIndex + 1) % totalSlides;
+    pauseSlides();
     showSlides();
-});
-
-document.querySelector('.carousel-container').addEventListener('mouseover', () => {
-    clearTimeout(autoSlide);
-});
-
-document.querySelector('.carousel-container').addEventListener('mouseout', () => {
-    autoSlide = setTimeout(showSlides, 3000);
 });
