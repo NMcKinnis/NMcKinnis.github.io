@@ -1,29 +1,43 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const carouselContainer = document.querySelector('.carousel-container');
-    const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevButton = document.querySelector('.carousel-control-prev');
+    const nextButton = document.querySelector('.carousel-control-next');
     let currentIndex = 0;
+    const totalSlides = slides.length;
 
-    function showItem(index) {
-        items.forEach((item, i) => {
-            item.style.display = i === index ? 'block' : 'none';
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
         });
     }
 
-    function nextItem() {
-        currentIndex = (currentIndex + 1) % totalItems;
-        showItem(currentIndex);
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
     }
 
-    function prevItem() {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        showItem(currentIndex);
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
     }
 
-    document.querySelector('.next').addEventListener('click', nextItem);
-    document.querySelector('.prev').addEventListener('click', prevItem);
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
 
-    showItem(currentIndex);
+    showSlide(currentIndex);
 
-    setInterval(nextItem, 3000);
+    // Auto-slide every 3 seconds
+    setInterval(nextSlide, 3000);
+
+    // Pause on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    let autoSlide = setInterval(nextSlide, 3000);
+
+    carouselContainer.addEventListener('mouseover', () => {
+        clearInterval(autoSlide);
+    });
+
+    carouselContainer.addEventListener('mouseout', () => {
+        autoSlide = setInterval(nextSlide, 3000);
+    });
 });
