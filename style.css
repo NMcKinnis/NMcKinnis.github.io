@@ -1,36 +1,35 @@
-/* Carousel Container Styling */
-.carousel-container {
+.carousel {
     position: relative;
     width: 750px;
     height: 750px;
-    margin: 0 auto; /* Centers the carousel on the page */
-    overflow: hidden; /* Hides overflow to only show one image at a time */
+    margin: 0 auto; /* Center carousel */
+    overflow: hidden;
 }
 
-/* Image Styling */
-.carousel-slide img {
-    width: 100%; 
-    height: 100%;
-    object-fit: contain; /* Ensures the entire image is visible without cropping */
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: none;
 }
 
-/* Navigation Button Styling */
-button.prev, button.next {
+.carousel img:first-child {
+    display: block;
+}
+
+.left, .right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    border: none;
     padding: 10px;
     cursor: pointer;
-    z-index: 10; /* Ensures buttons are on top of images */
 }
 
-button.prev {
+.left {
     left: 0;
 }
 
-button.next {
+.right {
     right: 0;
 }

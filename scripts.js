@@ -1,36 +1,52 @@
-// Initialize carousel index
-let carouselIndex = 0;
+document.addEventListener("DOMContentLoaded", function() {
+    let images = document.querySelectorAll(".carousel img");
+    let currentIndex = 0;
+    let imageOrder = ["Tales Of Valoris", "Hit N' Bit", "Revenge of the Tartans", "Drawn to Dream"];
+    let carousel = document.querySelector(".carousel");
+    let leftBtn = document.querySelector(".left");
+    let rightBtn = document.querySelector(".right");
 
-// Select all images within the carousel
-const images = document.querySelectorAll('.carousel-slide img');
-const totalImages = images.length;
-
-// Function to display the image based on index
-function showImage(index) {
-    images.forEach((img, i) => {
-        img.style.display = i === index ? 'block' : 'none';
+    // Ensure proper ordering of images
+    images = Array.from(images).sort((a, b) => {
+        return imageOrder.indexOf(a.alt) - imageOrder.indexOf(b.alt);
     });
-}
 
-// Function to move to the next image
-function nextImage() {
-    carouselIndex = (carouselIndex + 1) % totalImages;
-    showImage(carouselIndex);
-}
+    // Function to update carousel display
+    function showImage(index) {
+        images.forEach((img, i) => {
+            img.style.display = i === index ? "block" : "none";
+        });
+    }
 
-// Function to start the carousel
-function startCarousel() {
-    showImage(carouselIndex);
-    setInterval(nextImage, 3000); // Change image every 3 seconds
-}
+    // Initial display of the first image
+    showImage(currentIndex);
 
-// Event listeners for manual controls (optional)
-document.querySelector('.prev').addEventListener('click', () => {
-    carouselIndex = (carouselIndex - 1 + totalImages) % totalImages;
-    showImage(carouselIndex);
+    // Auto rotate images
+    let interval = setInterval(function() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    }, 3000);
+
+    // Pause on hover
+    carousel.addEventListener("mouseover", function() {
+        clearInterval(interval);
+    });
+
+    carousel.addEventListener("mouseout", function() {
+        interval = setInterval(function() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }, 3000);
+    });
+
+    // Navigation buttons
+    leftBtn.addEventListener("click", function() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+    });
+
+    rightBtn.addEventListener("click", function() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    });
 });
-
-document.querySelector('.next').addEventListener('click', nextImage);
-
-// Start the carousel on page load
-startCarousel();
