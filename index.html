@@ -3,98 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nick McKinnis Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Swirling background animation */
-        @keyframes swirl {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .swirling-background {
-            background: linear-gradient(270deg, #ff7eb3, #ff758c, #ff7eb3, #ff758c);
-            background-size: 400% 400%;
-            animation: swirl 15s ease infinite;
-        }
-
-        /* Centering carousel images */
-        .carousel-inner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 750px; /* Match the desired height of the carousel */
-        }
-
-        .carousel-item img {
-            margin: 0 auto;
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain; /* Ensures the images are fully visible while maintaining their aspect ratio */
-        }
-    </style>
+    <title>Nick McKinnis - Technical Game Designer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <div class="swirling-background">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <a href="tales_of_valoris.html">
-                        <img src="images/tales_of_valoris.png" class="d-block w-100" alt="Tales of Valoris">
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="hit_n_bit.html">
-                        <img src="images/hit_n_bit.png" class="d-block w-100" alt="Hit N' Bit">
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="revenge_of_the_tartans.html">
-                        <img src="images/revenge_of_the_tartans.png" class="d-block w-100" alt="Revenge of the Tartans">
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="drawn_to_dream.html">
-                        <img src="images/drawn_to_dream.png" class="d-block w-100" alt="Drawn to Dream">
-                    </a>
-                </div>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <p>I am <strong>Nick McKinnis</strong>, a technical game designer...</p>
+        <!-- more introductory text here -->
+    </header>
+
+    <section id="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="images/tales_of_valoris.jpg" alt="Tales Of Valoris">
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="carousel-slide">
+                <img src="images/hit_n_bit.jpg" alt="Hit N' Bit">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/revenge_of_the_tartans.jpg" alt="Revenge of the Tartans">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/drawn_to_dream.jpg" alt="Drawn to Dream">
+            </div>
         </div>
-    </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-links">
+        <nav>
             <a href="index.html">Home</a>
-            <a href="tales_of_valoris.html">Tales of Valoris</a>
-            <a href="hit_n_bit.html">Hit N' Bit</a>
-            <a href="revenge_of_the_tartans.html">Revenge of the Tartans</a>
-            <a href="drawn_to_dream.html">Drawn to Dream</a>
-        </div>
+            <a href="about.html">About Me</a>
+            <a href="games/tales_of_valoris.html">Tales Of Valoris</a>
+            <a href="games/hit_n_bit.html">Hit N' Bit</a>
+            <a href="games/revenge_of_the_tartans.html">Revenge of the Tartans</a>
+            <a href="games/drawn_to_dream.html">Drawn to Dream</a>
+            <a href="side_quests.html">Side Quests</a>
+        </nav>
     </footer>
-
-    <!-- Bootstrap and other scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            // Ensure carousel pauses on hover and resumes after hover
-            $('#carouselExampleControls').carousel({
-                interval: 3000,
-                pause: "hover",
-                wrap: true
-            });
-        });
-    </script>
 </body>
 </html>
