@@ -1,52 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let images = document.querySelectorAll(".carousel img");
+    const carouselContainer = document.querySelector('.carousel-container');
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
     let currentIndex = 0;
-    let imageOrder = ["Tales Of Valoris", "Hit N' Bit", "Revenge of the Tartans", "Drawn to Dream"];
-    let carousel = document.querySelector(".carousel");
-    let leftBtn = document.querySelector(".left");
-    let rightBtn = document.querySelector(".right");
 
-    // Ensure proper ordering of images
-    images = Array.from(images).sort((a, b) => {
-        return imageOrder.indexOf(a.alt) - imageOrder.indexOf(b.alt);
-    });
-
-    // Function to update carousel display
-    function showImage(index) {
-        images.forEach((img, i) => {
-            img.style.display = i === index ? "block" : "none";
+    function showItem(index) {
+        items.forEach((item, i) => {
+            item.style.display = i === index ? 'block' : 'none';
         });
     }
 
-    // Initial display of the first image
-    showImage(currentIndex);
+    function nextItem() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        showItem(currentIndex);
+    }
 
-    // Auto rotate images
-    let interval = setInterval(function() {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage(currentIndex);
-    }, 3000);
+    function prevItem() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        showItem(currentIndex);
+    }
 
-    // Pause on hover
-    carousel.addEventListener("mouseover", function() {
-        clearInterval(interval);
-    });
+    document.querySelector('.next').addEventListener('click', nextItem);
+    document.querySelector('.prev').addEventListener('click', prevItem);
 
-    carousel.addEventListener("mouseout", function() {
-        interval = setInterval(function() {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        }, 3000);
-    });
+    showItem(currentIndex);
 
-    // Navigation buttons
-    leftBtn.addEventListener("click", function() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        showImage(currentIndex);
-    });
-
-    rightBtn.addEventListener("click", function() {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage(currentIndex);
-    });
+    setInterval(nextItem, 3000);
 });
