@@ -1,94 +1,78 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #e07a5f, #f2cc8f);
+    color: #333;
+    animation: backgroundAnimation 30s infinite alternate;
 }
 
 header {
     text-align: center;
-    padding: 20px;
+    padding: 50px;
 }
 
-#carousel {
+.carousel {
     position: relative;
-    max-width: 750px;
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
     overflow: hidden;
 }
 
-.carousel-container {
+.carousel-images {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease-in-out;
 }
 
-.carousel-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    text-align: center;
+.carousel-images img {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
 }
 
-.carousel-slide img {
-    width: 750px;
-    height: 750px;
-    object-fit: contain;
-}
-
-.prev, .next {
-    cursor: pointer;
+.carousel-btn {
     position: absolute;
     top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.prev {
-    left: 0;
-    border-radius: 3px 0 0 3px;
+.left-btn {
+    left: 10px;
 }
 
-.next {
-    right: 0;
-    border-radius: 3px 3px 3px 0;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+.right-btn {
+    right: 10px;
 }
 
 footer {
-    text-align: center;
-    padding: 20px;
     background-color: #333;
-    color: white;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
 }
 
 footer nav a {
-    color: #ccc;
+    color: #fff;
     margin: 0 15px;
     text-decoration: none;
 }
 
 footer nav a:hover {
-    color: white;
+    text-decoration: underline;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes backgroundAnimation {
+    0% { background-color: #6B8E23; }
+    25% { background-color: #4682B4; }
+    50% { background-color: #DAA520; }
+    75% { background-color: #8B4513; }
+    100% { background-color: #556B2F; }
 }
