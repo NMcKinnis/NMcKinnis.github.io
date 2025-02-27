@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nick McKinnis - Technical Game Designer</title>
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <style>
-        /* Make the body and game container fill the entire viewport */
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            height: 100%;
-        }
-        #gameContainer {
-            width: 100vw;
-            height: 100vh;
-        }
-    </style>
-</head>
-<body>
-    <div id="gameContainer"></div>
-
-    <!-- Load the Unity WebGL loader -->
-    <script src="./Build/NMcKinnis.github.io.loader.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity Web Player | Nick McKinnis - Technical Game Designer</title>
+  </head>
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1" style="width: 1920px; height: 1080px; background: #231F20"></canvas>
+    <script src="Build/NMcKinnis.github.io.loader.js"></script>
     <script>
-        // Initialize the Unity instance
-        createUnityInstance(document.querySelector("#gameContainer"), {
-            dataUrl: "./Build/NMcKinnis.github.io.data",
-            frameworkUrl: "./Build/NMcKinnis.github.io.framework.js",
-            codeUrl: "./Build/NMcKinnis.github.io.wasm",
-        }).then((unityInstance) => {
-            console.log("Unity WebGL game loaded successfully!");
-        }).catch((error) => {
-            console.error("Failed to load Unity WebGL game:", error);
-        });
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/NMcKinnis.github.io.data",
+        frameworkUrl: "Build/NMcKinnis.github.io.framework.js",
+        codeUrl: "Build/NMcKinnis.github.io.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Nick McKinnis",
+        productName: "Nick McKinnis - Technical Game Designer",
+        productVersion: "1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
     </script>
-</body>
+  </body>
 </html>
