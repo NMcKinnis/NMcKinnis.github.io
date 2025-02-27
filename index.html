@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Unity App</title>
-    <style>
-        /* Make the body and iframe cover the entire viewport */
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        #unity-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>%UNITY_WEB_NAME%</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.javascript"></script>
+    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+<script>
+    var gameInstance = UnityLoader.instantiate("gameContainer", "./Build/Build.loader.js", {onProgress: UnityProgress});
+</script>
 </head>
 <body>
-    <!-- Unity WebGL Content -->
-    <div id="unity-container">
-        <iframe id="unity-frame" src="./Build/index.html" 
-                style="border: none; width: 100%; height: 100%;">
-        </iframe>
-    </div>
+<div class="webgl-content">
+    <div id="gameContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px"></div>
+</div>
+<div class="simmer">template by: <a href="https://simmer.io" target="_blank">SIMMER.io</a></div>
+<script src="TemplateData/responsive.javascript"></script>
 </body>
 </html>
