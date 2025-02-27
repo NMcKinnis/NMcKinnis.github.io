@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nick McKinnis - Technical Game Designer</title>
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="./Build/NMcKinnis.github.io.loader.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var gameInstance = UnityLoader.instantiate("gameContainer", "./Build/NMcKinnis.github.io.json");
-        });
-    </script>
     <style>
         /* Make the body and game container fill the entire viewport */
         html, body {
@@ -27,5 +21,20 @@
 </head>
 <body>
     <div id="gameContainer"></div>
+
+    <!-- Load the Unity WebGL loader -->
+    <script src="./Build/NMcKinnis.github.io.loader.js"></script>
+    <script>
+        // Initialize the Unity instance
+        createUnityInstance(document.querySelector("#gameContainer"), {
+            dataUrl: "./Build/NMcKinnis.github.io.data",
+            frameworkUrl: "./Build/NMcKinnis.github.io.framework.js",
+            codeUrl: "./Build/NMcKinnis.github.io.wasm",
+        }).then((unityInstance) => {
+            console.log("Unity WebGL game loaded successfully!");
+        }).catch((error) => {
+            console.error("Failed to load Unity WebGL game:", error);
+        });
+    </script>
 </body>
 </html>
